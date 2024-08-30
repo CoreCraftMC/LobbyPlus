@@ -8,7 +8,10 @@ import me.corecraft.lobbyplus.LobbyPlus;
 import me.corecraft.lobbyplus.configs.impl.messages.ErrorKeys;
 import me.corecraft.lobbyplus.configs.impl.messages.MiscKeys;
 import me.corecraft.lobbyplus.configs.impl.messages.PlayerKeys;
+import me.corecraft.lobbyplus.configs.impl.messages.commands.ToggleKeys;
 import me.corecraft.lobbyplus.configs.impl.types.ConfigKeys;
+import me.corecraft.lobbyplus.configs.impl.types.ProtectionKeys;
+
 import java.io.File;
 import java.util.HashMap;
 import java.util.List;
@@ -36,7 +39,7 @@ public class ConfigManager {
         config = SettingsManagerBuilder
                 .withYamlFile(new File(rootFolder, "config.yml"), builder)
                 .useDefaultMigrationService()
-                .configurationData(ConfigKeys.class)
+                .configurationData(ConfigKeys.class, ProtectionKeys.class)
                 .create();
 
         FileUtil.extracts(LobbyPlus.class, "/locale/", rootFolder.toPath().resolve("locale"), false);
@@ -46,7 +49,7 @@ public class ConfigManager {
         locales.put("en-US", SettingsManagerBuilder
                 .withYamlFile(new File(localeFolder, "en_US.yml"), builder)
                 .useDefaultMigrationService()
-                .configurationData(MiscKeys.class, PlayerKeys.class, ErrorKeys.class)
+                .configurationData(MiscKeys.class, PlayerKeys.class, ErrorKeys.class, ToggleKeys.class)
                 .create());
 
         files.forEach(file -> {
@@ -54,7 +57,7 @@ public class ConfigManager {
                 final SettingsManager settings = SettingsManagerBuilder
                         .withYamlFile(new File(localeFolder, file + ".yml"), builder)
                         .useDefaultMigrationService()
-                        .configurationData(MiscKeys.class, PlayerKeys.class, ErrorKeys.class)
+                        .configurationData(MiscKeys.class, PlayerKeys.class, ErrorKeys.class, ToggleKeys.class)
                         .create();
 
                 locales.put(file, settings);

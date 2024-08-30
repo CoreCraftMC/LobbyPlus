@@ -37,3 +37,13 @@ errors:
   internal-error: "{prefix}<red>Ein interner Fehler ist aufgetreten. Bitte prüfen Sie die Konsole
     für den vollständigen Fehler."
   message-empty: "{prefix}<red>Die Nachricht kann nicht leer sein."
+commands:
+  bypass:
+    # A list of available placeholders:
+    #
+    # {state} which returns whatever argument was supplied in /lobbyplus bypass <state>
+    #
+    # {status} returns enabled or disabled, which can be configured below.
+    message: "{prefix}<green>{state} wurde {status}"
+    enabled: "<green>aktiviert"
+    disabled: "<red>deaktiviert"

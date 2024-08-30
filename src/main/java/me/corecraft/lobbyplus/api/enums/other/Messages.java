@@ -10,6 +10,7 @@ import me.corecraft.lobbyplus.configs.impl.messages.ErrorKeys;
 import me.corecraft.lobbyplus.configs.impl.messages.MiscKeys;
 import me.corecraft.lobbyplus.configs.impl.messages.PlayerKeys;
 import me.corecraft.lobbyplus.configs.ConfigManager;
+import me.corecraft.lobbyplus.configs.impl.messages.commands.ToggleKeys;
 import me.corecraft.lobbyplus.configs.impl.types.ConfigKeys;
 import me.corecraft.lobbyplus.utils.MsgUtils;
 import org.bukkit.command.CommandSender;
@@ -33,6 +34,10 @@ public enum Messages {
     player_not_found(PlayerKeys.not_online),
     no_permission(PlayerKeys.no_permission),
     same_player(PlayerKeys.same_player),
+
+    bypass_toggle(ToggleKeys.bypass_toggle),
+    toggle_enabled(ToggleKeys.toggle_enabled),
+    toggle_disabled(ToggleKeys.toggle_disabled),
 
     must_be_a_player(PlayerKeys.must_be_a_player),
     must_be_console_sender(PlayerKeys.must_be_console_sender),
