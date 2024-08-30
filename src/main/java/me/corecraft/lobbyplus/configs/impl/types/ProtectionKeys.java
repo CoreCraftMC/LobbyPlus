@@ -35,4 +35,16 @@ public class ProtectionKeys implements SettingsHolder {
     @Comment("Prevents a player from dropping items, if this is set to true.")
     public static final Property<Boolean> event_prevent_item_drop = newProperty("protection.item.prevent-drop", true);
 
+    @Comment("Prevent leaf decay, if this is set to true.")
+    public static final Property<Boolean> event_prevent_leaf_decay = newProperty("protection.block.prevent-leaf-decay", true);
+
+    @Comment("Prevents fire from spreading, if this is set to true.")
+    public static final Property<Boolean> event_prevent_fire_spread = newProperty("protection.block.prevent-fire-spread", true);
+
+    @Comment("Prevents blocks from burning, if this is set to true.")
+    public static final Property<Boolean> event_prevent_block_burn = newProperty("protection.block.prevent-block-burn", true);
+
+    @Comment("Prevents mobs from spawning, if this is set to true.")
+    public static final Property<Boolean> event_prevent_mob_spawning = newProperty("protection.block.prevent-mob-spawning", true);
+
 }

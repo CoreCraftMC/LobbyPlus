@@ -1,4 +1,4 @@
-package me.corecraft.lobbyplus.listeners;
+package me.corecraft.lobbyplus.listeners.players;
 
 import ch.jalu.configme.SettingsManager;
 import me.corecraft.lobbyplus.LobbyPlus;

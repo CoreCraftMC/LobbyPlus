@@ -1,4 +1,4 @@
-package me.corecraft.lobbyplus.listeners;
+package me.corecraft.lobbyplus.listeners.players;
 
 import ch.jalu.configme.SettingsManager;
 import io.papermc.paper.event.player.PlayerPickItemEvent;
@@ -14,6 +14,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 
 public class PlayerListener implements Listener {
@@ -65,5 +66,12 @@ public class PlayerListener implements Listener {
         }
 
         event.setCancelled(true);
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+    public void onPlayerDeath(PlayerDeathEvent event) {
+        //todo() add toggle?
+
+        event.deathMessage(null);
     }
 }

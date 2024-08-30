@@ -11,9 +11,10 @@ import me.corecraft.lobbyplus.api.cache.listeners.CacheListener;
 import me.corecraft.lobbyplus.api.enums.other.Permissions;
 import me.corecraft.lobbyplus.commands.CommandManager;
 import me.corecraft.lobbyplus.configs.ConfigManager;
-import me.corecraft.lobbyplus.listeners.InteractionListener;
-import me.corecraft.lobbyplus.listeners.PlayerListener;
-import org.bukkit.Server;
+import me.corecraft.lobbyplus.listeners.MobListener;
+import me.corecraft.lobbyplus.listeners.ProtectionListener;
+import me.corecraft.lobbyplus.listeners.players.InteractionListener;
+import me.corecraft.lobbyplus.listeners.players.PlayerListener;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionDefault;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -79,7 +80,9 @@ public class LobbyPlus extends Vital {
                 new CacheListener(),
 
                 new InteractionListener(),
-                new PlayerListener()
+                new ProtectionListener(),
+                new PlayerListener(),
+                new MobListener()
         ).forEach(listener -> getServer().getPluginManager().registerEvents(listener, this));
 
         CommandManager.load();
