@@ -46,7 +46,7 @@ public class ConfigManager {
 
         final List<String> files = FileUtil.getFiles(rootFolder, "locale", ".yml");
 
-        locales.put("en-US", SettingsManagerBuilder
+        locales.put("en_US", SettingsManagerBuilder
                 .withYamlFile(new File(localeFolder, "en_US.yml"), builder)
                 .useDefaultMigrationService()
                 .configurationData(MiscKeys.class, PlayerKeys.class, ErrorKeys.class, ToggleKeys.class)
