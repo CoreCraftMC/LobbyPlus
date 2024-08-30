@@ -17,6 +17,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 
 public class InteractionListener implements Listener {
 
@@ -44,8 +45,6 @@ public class InteractionListener implements Listener {
             }
         }
 
-        final Block block = event.getBlock();
-
         MiscUtils.play(player, block.getLocation(), this.config.getProperty(ProtectionKeys.protection_sound), Sound.Source.PLAYER);
 
         event.setCancelled(true);
@@ -69,12 +68,28 @@ public class InteractionListener implements Listener {
             }
         }
 
-        final Block block = event.getBlock();
+        MiscUtils.play(player, block.getLocation(), this.config.getProperty(ProtectionKeys.protection_sound), Sound.Source.PLAYER);
+
+        event.setCancelled(true);
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+    public void onBlockInteract(PlayerInteractEvent event) {
         final Player player = event.getPlayer();
 
         final Block block = event.getClickedBlock();
 
         if (block == null || block.getType().isAir()) return;
+
+        if (!this.config.getProperty(ProtectionKeys.event_prevent_block_interact) || Permissions.event_block_interact.hasPermission(player)) return;
+
+        final User user = this.userManager.getUser(player);
+
+        if (user != null) {
+            if (user.activeBypassTypes.contains(BypassType.allow_block_interact.getName())) {
+                return;
+            }
+        }
 
         MiscUtils.play(player, block.getLocation(), this.config.getProperty(ProtectionKeys.protection_sound), Sound.Source.PLAYER);
 
