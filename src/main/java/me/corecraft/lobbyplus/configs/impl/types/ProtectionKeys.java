@@ -50,4 +50,16 @@ public class ProtectionKeys implements SettingsHolder {
     @Comment("Prevents a death mess if a player dies, if this is set to true.")
     public static final Property<Boolean> event_prevent_death_message = newProperty("protection.prevent-death-message", true);
 
+    @Comment("Prevents fall damage, if this is set to true.")
+    public static final Property<Boolean> event_prevent_fall_damage = newProperty("protection.damage.prevent-fall-damage", true);
+
+    @Comment("Prevents fire damage, if this is set to true.")
+    public static final Property<Boolean> event_prevent_fire_damage = newProperty("protection.damage.prevent-fire-damage", true);
+
+    @Comment("Prevents void damage, if this is set to true.")
+    public static final Property<Boolean> event_prevent_void_damage = newProperty("protection.damage.prevent-void-damage", true);
+
+    @Comment("Prevents weather changing, if this is set to true.")
+    public static final Property<Boolean> event_prevent_weather_change = newProperty("protection.prevent-weather-change", true);
+
 }

@@ -1,8 +1,6 @@
 package me.corecraft.lobbyplus.listeners;
 
 import ch.jalu.configme.SettingsManager;
-import me.corecraft.lobbyplus.LobbyPlus;
-import me.corecraft.lobbyplus.api.cache.UserManager;
 import me.corecraft.lobbyplus.configs.ConfigManager;
 import me.corecraft.lobbyplus.configs.impl.types.ProtectionKeys;
 import org.bukkit.event.EventHandler;
@@ -13,10 +11,6 @@ import org.bukkit.event.block.BlockIgniteEvent;
 import org.bukkit.event.block.LeavesDecayEvent;
 
 public class ProtectionListener implements Listener {
-
-    private final LobbyPlus plugin = LobbyPlus.get();
-
-    private final UserManager userManager = this.plugin.getUserManager();
 
     private final SettingsManager config = ConfigManager.getConfig();
 

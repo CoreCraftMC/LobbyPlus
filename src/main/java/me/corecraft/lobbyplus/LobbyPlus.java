@@ -11,6 +11,7 @@ import me.corecraft.lobbyplus.api.cache.listeners.CacheListener;
 import me.corecraft.lobbyplus.api.enums.other.Permissions;
 import me.corecraft.lobbyplus.commands.CommandManager;
 import me.corecraft.lobbyplus.configs.ConfigManager;
+import me.corecraft.lobbyplus.listeners.MiscListener;
 import me.corecraft.lobbyplus.listeners.MobListener;
 import me.corecraft.lobbyplus.listeners.ProtectionListener;
 import me.corecraft.lobbyplus.listeners.players.DamageListener;
@@ -83,6 +84,7 @@ public class LobbyPlus extends Vital {
                 new ProtectionListener(),
                 new DamageListener(),
                 new PlayerListener(),
+                new MiscListener(),
                 new MobListener()
         ).forEach(listener -> getServer().getPluginManager().registerEvents(listener, this));
 
