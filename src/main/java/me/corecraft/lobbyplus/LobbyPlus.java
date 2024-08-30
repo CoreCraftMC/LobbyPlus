@@ -8,9 +8,17 @@ import com.ryderbelserion.vital.paper.Vital;
 import io.github.retrooper.packetevents.factory.spigot.SpigotPacketEventsBuilder;
 import me.corecraft.lobbyplus.api.cache.UserManager;
 import me.corecraft.lobbyplus.api.cache.listeners.CacheListener;
+import me.corecraft.lobbyplus.api.enums.other.Permissions;
 import me.corecraft.lobbyplus.commands.CommandManager;
 import me.corecraft.lobbyplus.configs.ConfigManager;
+import me.corecraft.lobbyplus.listeners.InteractionListener;
+import me.corecraft.lobbyplus.listeners.PlayerListener;
+import org.bukkit.Server;
+import org.bukkit.permissions.Permission;
+import org.bukkit.permissions.PermissionDefault;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 import java.util.Locale;
 
@@ -40,7 +48,30 @@ public class LobbyPlus extends Vital {
     public void onEnable() {
         this.userManager = new UserManager(this);
 
-        ConfigManager.load(getDataFolder());
+        final org.bukkit.plugin.@NotNull PluginManager server = getServer().getPluginManager();
+
+        for (final Permissions value : Permissions.values()) {
+            if (!value.shouldRegister()) continue;
+
+            final String node = value.getNode();
+
+            if (server.getPermission(node) == null) {
+                final String description = value.getDescription();
+                final PermissionDefault permissionDefault = value.isDefault();
+
+                final Permission permission = new Permission(node, description, permissionDefault);
+
+                server.addPermission(permission);
+
+                if (isVerbose()) {
+                    getComponentLogger().info("Successfully added permission {} to the server! Default: {}", node, permissionDefault);
+                }
+            } else {
+                if (isVerbose()) {
+                    getComponentLogger().warn("The permission {} is already added to the server!", node);
+                }
+            }
+        }
 
         List.of(
                 new CacheListener()
