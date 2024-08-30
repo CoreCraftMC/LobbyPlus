@@ -31,7 +31,7 @@ public class ProtectionListener implements Listener {
     public void onBlockIgnite(BlockIgniteEvent event) {
         if (!this.config.getProperty(ProtectionKeys.event_prevent_fire_spread)) return;
 
-        event.setCancelled(true);
+        if (event.getCause() == BlockIgniteEvent.IgniteCause.SPREAD) event.setCancelled(true);
     }
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
