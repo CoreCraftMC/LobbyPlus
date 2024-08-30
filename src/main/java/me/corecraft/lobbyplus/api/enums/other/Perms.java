@@ -3,17 +3,20 @@ package me.corecraft.lobbyplus.api.enums.other;
 import org.bukkit.entity.Player;
 import org.bukkit.permissions.PermissionDefault;
 import java.util.HashMap;
+import java.util.Map;
 
-public enum Permissions {
+public enum Perms {
 
-    RELOAD("reload", "Reloads the plugin.", PermissionDefault.OP);
+    reload_plugin("reload", "Access to /lobbyplus reload", PermissionDefault.OP),
+    help("help", "Access to /lobbyplus help", PermissionDefault.TRUE),
+    use("use", "Access to /lobbyplus", PermissionDefault.TRUE);
 
     private final String node;
     private final String description;
     private final PermissionDefault isDefault;
-    private final HashMap<String, Boolean> children;
+    private final Map<String, Boolean> children;
 
-    Permissions(String node, String description, PermissionDefault isDefault, HashMap<String, Boolean> children) {
+    Perms(String node, String description, PermissionDefault isDefault, Map<String, Boolean> children) {
         this.node = node;
         this.description = description;
 
@@ -22,7 +25,7 @@ public enum Permissions {
         this.children = children;
     }
 
-    Permissions(String node, String description, PermissionDefault isDefault) {
+    Perms(String node, String description, PermissionDefault isDefault) {
         this.node = node;
         this.description = description;
 
@@ -30,23 +33,23 @@ public enum Permissions {
         this.children = new HashMap<>();
     }
 
-    public String getNode() {
+    public final String getNode() {
         return "lobbyplus." + this.node;
     }
 
-    public String getDescription() {
+    public final String getDescription() {
         return this.description;
     }
 
-    public PermissionDefault isDefault() {
+    public final PermissionDefault isDefault() {
         return this.isDefault;
     }
 
-    public HashMap<String, Boolean> getChildren() {
+    public final Map<String, Boolean> getChildren() {
         return this.children;
     }
 
-    public boolean hasPermission(Player player) {
+    public final boolean hasPermission(final Player player) {
         return player.hasPermission(getNode());
     }
 }
