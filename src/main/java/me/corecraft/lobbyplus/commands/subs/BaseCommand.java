@@ -4,7 +4,6 @@ import dev.triumphteam.cmd.bukkit.annotation.Permission;
 import dev.triumphteam.cmd.core.annotations.Command;
 import me.corecraft.lobbyplus.LobbyPlus;
 import me.corecraft.lobbyplus.api.cache.UserManager;
-import me.corecraft.lobbyplus.configs.ConfigManager;
 import me.corecraft.lobbyplus.configs.impl.messages.MiscKeys;
 import me.corecraft.lobbyplus.utils.MsgUtils;
 import org.bukkit.Server;
@@ -23,7 +22,7 @@ public class BaseCommand {
     @Command
     @Permission(value = "lobbyplus.use", def = PermissionDefault.TRUE, description = "Access to /lobbyplus")
     public void root(final CommandSender sender) {
-        final Map<String, List<String>> help = ConfigManager.getLocale(MsgUtils.getLocale(sender)).getProperty(MiscKeys.help).getEntry();
+        final Map<String, List<String>> help = this.userManager.getUser(sender).getLocale().getProperty(MiscKeys.help).getEntry();
 
         help.get("1").forEach(line -> MsgUtils.sendMessage(sender, line, "{max}", String.valueOf(help.size())));
     }

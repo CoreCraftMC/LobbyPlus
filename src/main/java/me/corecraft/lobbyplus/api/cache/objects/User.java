@@ -1,14 +1,21 @@
 package me.corecraft.lobbyplus.api.cache.objects;
 
+import ch.jalu.configme.SettingsManager;
 import com.ryderbelserion.vital.paper.api.enums.Support;
 import com.ryderbelserion.vital.paper.util.AdvUtil;
 import me.clip.placeholderapi.PlaceholderAPI;
+import me.corecraft.lobbyplus.LobbyPlus;
+import me.corecraft.lobbyplus.configs.ConfigManager;
 import net.kyori.adventure.bossbar.BossBar;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 public class User {
+
+    private final LobbyPlus plugin = LobbyPlus.get();
 
     public final CommandSender sender;
     public final Player player;
@@ -25,7 +32,7 @@ public class User {
 
     public String locale = "en_US";
 
-    public transient boolean canBuild = false;
+    public final List<String> activeBypassTypes = new ArrayList<>();
 
     public transient BossBar bossBar = null;
 
@@ -68,6 +75,10 @@ public class User {
         this.locale = locale.getLanguage() + "_" + locale.getCountry();
 
         return this;
+    }
+
+    public final SettingsManager getLocale() {
+        return ConfigManager.getLocale(this.locale);
     }
 
     // other checks
