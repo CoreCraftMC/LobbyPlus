@@ -70,7 +70,7 @@ public class PlayerListener implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onPlayerDeath(PlayerDeathEvent event) {
-        //todo() add toggle?
+        if (!this.config.getProperty(ProtectionKeys.event_prevent_death_message)) return;
 
         event.deathMessage(null);
     }

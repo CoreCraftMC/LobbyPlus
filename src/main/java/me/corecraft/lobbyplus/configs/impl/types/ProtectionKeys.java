@@ -47,4 +47,7 @@ public class ProtectionKeys implements SettingsHolder {
     @Comment("Prevents mobs from spawning, if this is set to true.")
     public static final Property<Boolean> event_prevent_mob_spawning = newProperty("protection.block.prevent-mob-spawning", true);
 
+    @Comment("Prevents a death mess if a player dies, if this is set to true.")
+    public static final Property<Boolean> event_prevent_death_message = newProperty("protection.prevent-death-message", true);
+
 }
