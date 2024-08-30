@@ -1,0 +1,39 @@
+# Github: https://github.com/CoreCraftMC
+#
+# Ausgaben: https://github.com/CoreCraftMC/LobbyPlus/issues
+# Eigenschaften: https://github.com/CoreCraftMC/LobbyPlus/issues
+#
+# Alle Nachrichten erlauben die Verwendung von {prefix}, sofern nicht anders angegeben.
+#
+misc:
+  # A list of available placeholders: {command}
+  unknown-command: "{prefix}<red>{command} ist ein nicht bekannter Befehl."
+  # A list of available placeholders: {usage}
+  correct-usage: "{prefix}<red>Die korrekte Verwendung für diesen Befehl ist <yellow>{usage}"
+  plugin-reload: "{prefix}<green>Das Plugin wurde neu geladen."
+  feature-disabled: "{prefix}<red>Diese Funktion ist deaktiviert."
+  # This is the message, for the /lobbyplus help command!
+  command-help:
+    entry:
+      "1":
+        - "<bold><gold>━━━━━━━━━━━━━━━━━━━ LobbyPlus Hilfe ━━━━━━━━━━━━━━━━━━━</gold></bold>"
+        - " ⤷ <red>/lobbyplus bypass - <white>Ermöglicht das Einbauen von Laich."
+        - " ⤷ <red>/lobbyplus help - <white>Öffnet dieses Hilfemenü"
+        - " ⤷ <red>/lobbyplus reload - <white>Lädt das Plugin neu."
+        - "<bold><gold>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</gold></bold>"
+# All messages related to players.
+player:
+  requirements:
+    must-be-player: "{prefix}<red>Du musst ein Spieler sein, um diesen Befehl zu benutzen."
+    must-be-console-sender: "{prefix}<red>Sie müssen die Konsole benutzen, um diesen Befehl zu verwenden."
+  # A list of available placeholders: {player}
+  target-not-online: "{prefix}<rot>{Spieler} <grau>ist nicht online."
+  target-same-player: "{prefix}<red>Sie können diesen Befehl nicht auf sich selbst anwenden."
+  no-permission: "{prefix}<red>Sie haben nicht die Erlaubnis, diesen Befehl zu benutzen!"
+  inventory-not-empty: "{prefix}<red>Das Inventar ist nicht leer, bitte räumen Sie etwas
+    Raum."
+# All messages related to errors.
+errors:
+  internal-error: "{prefix}<red>Ein interner Fehler ist aufgetreten. Bitte prüfen Sie die Konsole
+    für den vollständigen Fehler."
+  message-empty: "{prefix}<red>Die Nachricht kann nicht leer sein."
