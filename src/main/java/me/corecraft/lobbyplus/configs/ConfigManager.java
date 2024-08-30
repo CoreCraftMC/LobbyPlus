@@ -11,8 +11,8 @@ import me.corecraft.lobbyplus.configs.impl.messages.PlayerKeys;
 import me.corecraft.lobbyplus.configs.impl.messages.commands.ToggleKeys;
 import me.corecraft.lobbyplus.configs.impl.types.ConfigKeys;
 import me.corecraft.lobbyplus.configs.impl.types.ProtectionKeys;
-
 import java.io.File;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,7 +34,7 @@ public class ConfigManager {
         rootFolder = dataFolder;
         localeFolder = new File(rootFolder, "locale");
 
-        YamlFileResourceOptions builder = YamlFileResourceOptions.builder().indentationSize(2).build();
+        YamlFileResourceOptions builder = YamlFileResourceOptions.builder().indentationSize(2).charset(StandardCharsets.UTF_8).build();
 
         config = SettingsManagerBuilder
                 .withYamlFile(new File(rootFolder, "config.yml"), builder)
