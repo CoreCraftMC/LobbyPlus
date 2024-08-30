@@ -13,6 +13,7 @@ import me.corecraft.lobbyplus.commands.CommandManager;
 import me.corecraft.lobbyplus.configs.ConfigManager;
 import me.corecraft.lobbyplus.listeners.MobListener;
 import me.corecraft.lobbyplus.listeners.ProtectionListener;
+import me.corecraft.lobbyplus.listeners.players.DamageListener;
 import me.corecraft.lobbyplus.listeners.players.InteractionListener;
 import me.corecraft.lobbyplus.listeners.players.PlayerListener;
 import org.bukkit.permissions.Permission;
@@ -80,6 +81,7 @@ public class LobbyPlus extends Vital {
 
                 new InteractionListener(),
                 new ProtectionListener(),
+                new DamageListener(),
                 new PlayerListener(),
                 new MobListener()
         ).forEach(listener -> getServer().getPluginManager().registerEvents(listener, this));

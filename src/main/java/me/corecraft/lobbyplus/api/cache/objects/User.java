@@ -34,6 +34,8 @@ public class User {
 
     public final List<String> activeBypassTypes = new ArrayList<>();
 
+    public boolean isPvpEnabled = false;
+
     public transient BossBar bossBar = null;
 
     public final User showBossBar() {
