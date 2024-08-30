@@ -30,6 +30,10 @@ public class InteractionListener implements Listener {
     public void onBlockPlace(BlockPlaceEvent event) {
         final Player player = event.getPlayer();
 
+        final Block block = event.getBlock();
+
+        if (block.getType().isAir()) return;
+
         if (!this.config.getProperty(ProtectionKeys.event_prevent_block_interact) || Permissions.event_block_interact.hasPermission(player)) return;
 
         final User user = this.userManager.getUser(player);
@@ -51,6 +55,10 @@ public class InteractionListener implements Listener {
     public void onBlockBreak(BlockBreakEvent event) {
         final Player player = event.getPlayer();
 
+        final Block block = event.getBlock();
+
+        if (block.getType().isAir()) return;
+
         if (!this.config.getProperty(ProtectionKeys.event_prevent_block_interact) || Permissions.event_block_interact.hasPermission(player)) return;
 
         final User user = this.userManager.getUser(player);
@@ -62,6 +70,11 @@ public class InteractionListener implements Listener {
         }
 
         final Block block = event.getBlock();
+        final Player player = event.getPlayer();
+
+        final Block block = event.getClickedBlock();
+
+        if (block == null || block.getType().isAir()) return;
 
         MiscUtils.play(player, block.getLocation(), this.config.getProperty(ProtectionKeys.protection_sound), Sound.Source.PLAYER);
 
