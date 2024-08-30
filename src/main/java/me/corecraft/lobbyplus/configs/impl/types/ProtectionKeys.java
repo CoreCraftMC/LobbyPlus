@@ -6,7 +6,9 @@ import ch.jalu.configme.configurationdata.CommentsConfiguration;
 import ch.jalu.configme.properties.Property;
 import me.corecraft.lobbyplus.configs.beans.SoundProperty;
 import org.jetbrains.annotations.NotNull;
+import java.util.List;
 import static ch.jalu.configme.properties.PropertyInitializer.newBeanProperty;
+import static ch.jalu.configme.properties.PropertyInitializer.newListProperty;
 import static ch.jalu.configme.properties.PropertyInitializer.newProperty;
 
 public class ProtectionKeys implements SettingsHolder {
@@ -16,15 +18,76 @@ public class ProtectionKeys implements SettingsHolder {
         conf.setComment("protection", "Prevents players from wreaking havoc in your lobby!");
     }
 
-    @Comment("Prevents a player from building, if this is set to true.")
-    public static final Property<Boolean> event_prevent_block_interact = newProperty("protection.block.prevent-interaction.toggle", true);
-
     @Comment({
             "A list of sounds: https://minecraft.wiki/w/Sounds.json",
             "",
             "Handles the sound to play, when a player cannot build, volume/pitch control, and Custom Sounds are supported!"
     })
-    public static final Property<SoundProperty> protection_sound = newBeanProperty(SoundProperty.class, "protection.block.prevent-interaction.sound", new SoundProperty().populate());
+    public static final Property<SoundProperty> event_prevent_interact_sound = newBeanProperty(SoundProperty.class, "protection.block.prevent-interaction.sound", new SoundProperty().populate());
+
+    public static final Property<List<String>> event_interactable_items = newListProperty("protection.block.interactable-items", List.of(
+            "oak_door",
+            "acacia_door",
+            "birch_door",
+            "dark_oak_door",
+            "spruce_door",
+            "jungle_door",
+
+            "oak_fence_gate",
+            "acacia_fence_gate",
+            "birch_fence_gate",
+            "dark_oak_fence_gate",
+            "spruce_fence_gate",
+            "jungle_fence_gate",
+
+            "oak_trapdoor",
+            "acacia_trapdoor",
+            "birch_trapdoor",
+            "dark_oak_trapdoor",
+            "spruce_trapdoor",
+            "jungle_trapdoor",
+
+            "oak_sign",
+            "acacia_sign",
+            "birch_sign",
+            "dark_oak_sign",
+            "spruce_sign",
+            "jungle_sign",
+
+            "oak_button",
+            "acacia_button",
+            "birch_button",
+            "dark_oak_button",
+            "jungle_button",
+
+            "anvil",
+            "beacon",
+
+            "red_bed",
+            "brewing_stand",
+            "daylight_detector",
+            "dispenser",
+            "hopper",
+            "dropper",
+
+            "enchanting_table",
+            "furnace",
+
+            "chest_minecart",
+            "hopper_minecart",
+            "minecart",
+
+            "lever",
+            "note_block",
+            "comparator",
+
+            "chest",
+            "ender_chest",
+            "trapped_chest"
+    ));
+
+    @Comment("Prevents a player from building, if this is set to true.")
+    public static final Property<Boolean> event_prevent_block_interact = newProperty("protection.block.prevent-interaction.toggle", true);
 
     @Comment("Prevents a player from picking up items, if this is set to true.")
     public static final Property<Boolean> event_prevent_item_pickup = newProperty("protection.item.prevent-pickup", true);

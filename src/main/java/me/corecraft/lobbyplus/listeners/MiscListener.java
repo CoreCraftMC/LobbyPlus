@@ -12,7 +12,7 @@ public class MiscListener implements Listener {
 
     private final SettingsManager config = ConfigManager.getConfig();
 
-    @EventHandler(priority = EventPriority.HIGHEST)
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onWeatherChange(WeatherChangeEvent event) {
         if (!this.config.getProperty(ProtectionKeys.event_prevent_weather_change)) return;
 

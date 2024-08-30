@@ -1,6 +1,7 @@
 package me.corecraft.lobbyplus.listeners.players;
 
 import ch.jalu.configme.SettingsManager;
+import com.ryderbelserion.vital.paper.util.ItemUtil;
 import me.corecraft.lobbyplus.LobbyPlus;
 import me.corecraft.lobbyplus.api.cache.UserManager;
 import me.corecraft.lobbyplus.api.cache.objects.User;
@@ -10,6 +11,7 @@ import me.corecraft.lobbyplus.configs.ConfigManager;
 import me.corecraft.lobbyplus.configs.impl.types.ProtectionKeys;
 import me.corecraft.lobbyplus.utils.MiscUtils;
 import net.kyori.adventure.sound.Sound;
+import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.ItemFrame;
@@ -52,7 +54,7 @@ public class InteractionListener implements Listener {
             }
         }
 
-        MiscUtils.play(player, block.getLocation(), this.config.getProperty(ProtectionKeys.protection_sound), Sound.Source.PLAYER);
+        MiscUtils.play(player, block.getLocation(), this.config.getProperty(ProtectionKeys.event_prevent_interact_sound), Sound.Source.PLAYER);
 
         event.setCancelled(true);
     }
@@ -75,7 +77,7 @@ public class InteractionListener implements Listener {
             }
         }
 
-        MiscUtils.play(player, block.getLocation(), this.config.getProperty(ProtectionKeys.protection_sound), Sound.Source.PLAYER);
+        MiscUtils.play(player, block.getLocation(), this.config.getProperty(ProtectionKeys.event_prevent_interact_sound), Sound.Source.PLAYER);
 
         event.setCancelled(true);
     }
@@ -98,12 +100,17 @@ public class InteractionListener implements Listener {
             }
         }
 
-        MiscUtils.play(player, block.getLocation(), this.config.getProperty(ProtectionKeys.protection_sound), Sound.Source.PLAYER);
+        final Material material = block.getType();
+
+        // if the material is in this list, consider it a non-destructive item
+        if (this.config.getProperty(ProtectionKeys.event_interactable_items).contains(material.getKey().getKey().toLowerCase())) {
+            return;
+        }
 
         event.setCancelled(true);
     }
 
-    @EventHandler(priority = EventPriority.HIGHEST)
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onItemFrameDamage(EntityDamageByEntityEvent event) {
         if (!this.config.getProperty(ProtectionKeys.event_prevent_block_interact) || !(event.getEntity() instanceof ItemFrame)) return;
 
@@ -121,10 +128,6 @@ public class InteractionListener implements Listener {
 
         if (event.getDamager() instanceof Projectile) {
             event.getDamager().remove();
-        }
-
-        if (event.getDamager() instanceof Player player) {
-            MiscUtils.play(player, event.getEntity().getLocation(), this.config.getProperty(ProtectionKeys.protection_sound), Sound.Source.PLAYER);
         }
 
         event.setCancelled(true);
@@ -145,8 +148,6 @@ public class InteractionListener implements Listener {
                 return;
             }
         }
-
-        MiscUtils.play(player, event.getRightClicked().getLocation(), this.config.getProperty(ProtectionKeys.protection_sound), Sound.Source.PLAYER);
 
         event.setCancelled(true);
     }
@@ -169,7 +170,7 @@ public class InteractionListener implements Listener {
             }
         }
 
-        MiscUtils.play(player, entity.getLocation(), this.config.getProperty(ProtectionKeys.protection_sound), Sound.Source.PLAYER);
+        MiscUtils.play(player, entity.getLocation(), this.config.getProperty(ProtectionKeys.event_prevent_interact_sound), Sound.Source.PLAYER);
 
         event.setCancelled(true);
     }
