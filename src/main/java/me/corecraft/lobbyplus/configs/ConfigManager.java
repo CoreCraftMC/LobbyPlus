@@ -23,28 +23,23 @@ public class ConfigManager {
 
     private static SettingsManager config;
 
-    private static File rootFolder;
-
-    private static File localeFolder;
-
     /**
      * Loads configuration files.
      */
     public static void load(final File dataFolder) {
-        rootFolder = dataFolder;
-        localeFolder = new File(rootFolder, "locale");
+        final File localeFolder = new File(dataFolder, "locale");
 
         YamlFileResourceOptions builder = YamlFileResourceOptions.builder().indentationSize(2).charset(StandardCharsets.UTF_8).build();
 
         config = SettingsManagerBuilder
-                .withYamlFile(new File(rootFolder, "config.yml"), builder)
+                .withYamlFile(new File(dataFolder, "config.yml"), builder)
                 .useDefaultMigrationService()
                 .configurationData(ConfigKeys.class, ProtectionKeys.class)
                 .create();
 
-        FileUtil.extracts(LobbyPlus.class, "/locale/", rootFolder.toPath().resolve("locale"), false);
+        FileUtil.extracts(LobbyPlus.class, "/locale/", dataFolder.toPath().resolve("locale"), false);
 
-        final List<String> files = FileUtil.getFiles(rootFolder, "locale", ".yml");
+        final List<String> files = FileUtil.getFiles(dataFolder, "locale", ".yml");
 
         locales.put("en_US", SettingsManagerBuilder
                 .withYamlFile(new File(localeFolder, "en_US.yml"), builder)
@@ -88,14 +83,10 @@ public class ConfigManager {
      * @return {@link SettingsManager}
      */
     public static SettingsManager getLocale(final String locale) {
+        if (config.getProperty(ConfigKeys.per_player_locale)) {
+            return locales.getOrDefault(config.getProperty(ConfigKeys.default_locale_file), locales.get("en_US"));
+        }
+
         return locales.getOrDefault(locale, locales.get("en_US"));
-    }
-
-    public static File getRootFolder() {
-        return rootFolder;
-    }
-
-    public static File getLocaleFolder() {
-        return localeFolder;
     }
 }
