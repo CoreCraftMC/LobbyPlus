@@ -11,21 +11,21 @@ rootProject.version = "1.0.0"
 repositories {
     maven("https://repo.codemc.io/repository/maven-releases")
 
+    maven("https://repo.triumphteam.dev/snapshots")
+
     maven("https://repo.fancyplugins.de/releases")
 }
 
 dependencies {
     paperweight.paperDevBundle(libs.versions.paper)
 
+    implementation(libs.triumph.cmds)
+
     implementation(libs.vital.paper)
 
     compileOnly(libs.placeholderapi)
 
     compileOnly(libs.packet.events)
-
-    compileOnly(libs.hikari.cp)
-
-    compileOnly(libs.yardwatch)
 }
 
 tasks {
