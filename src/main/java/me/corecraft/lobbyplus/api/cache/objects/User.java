@@ -4,7 +4,6 @@ import ch.jalu.configme.SettingsManager;
 import com.ryderbelserion.vital.paper.api.enums.Support;
 import com.ryderbelserion.vital.paper.util.AdvUtil;
 import me.clip.placeholderapi.PlaceholderAPI;
-import me.corecraft.lobbyplus.LobbyPlus;
 import me.corecraft.lobbyplus.configs.ConfigManager;
 import net.kyori.adventure.bossbar.BossBar;
 import org.bukkit.command.CommandSender;
@@ -14,8 +13,6 @@ import java.util.List;
 import java.util.Locale;
 
 public class User {
-
-    private final LobbyPlus plugin = LobbyPlus.get();
 
     public final CommandSender sender;
     public final Player player;

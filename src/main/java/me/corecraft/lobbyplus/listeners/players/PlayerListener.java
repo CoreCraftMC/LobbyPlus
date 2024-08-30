@@ -44,7 +44,7 @@ public class PlayerListener implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onPlayerFoodChange(FoodLevelChangeEvent event) {
-        if (!(event.getEntity() instanceof Player player)) return;
+        if (!(event.getEntity() instanceof Player)) return;
 
         if (!this.config.getProperty(ProtectionKeys.event_prevent_hunger_change)) return;
 
