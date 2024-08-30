@@ -1,14 +1,14 @@
-package me.corecraft.lobbyplus.api.cache.objects;
+package me.corecraft.lobbyplus.configs.beans;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Entry {
+public class EntryProperty {
 
     private Map<String, List<String>> entry = new HashMap<>();
 
-    public final Entry populate() {
+    public final EntryProperty populate() {
         this.entry.put("1", List.of(
                 "<bold><gold>━━━━━━━━━━━━━━━━━━━ LobbyPlus Help ━━━━━━━━━━━━━━━━━━━</gold></bold>",
                 " ⤷ <red>/lobbyplus bypass - <white>Allows you to build in spawn.",
