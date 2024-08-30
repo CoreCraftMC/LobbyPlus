@@ -97,6 +97,25 @@ public class LobbyPlus extends Vital {
             packets.stop();
         }
 
+        final org.bukkit.plugin.@NotNull PluginManager server = getServer().getPluginManager();
+
+        // this is to account for plugman oddities
+        for (final Permissions value : Permissions.values()) {
+            final String node = value.getNode();
+
+            if (server.getPermission(node) != null) {
+                server.removePermission(node);
+
+                if (isVerbose()) {
+                    getComponentLogger().info("Successfully removed permission {} from the server, since we are disabling.", node);
+                }
+            } else {
+                if (isVerbose()) {
+                    getComponentLogger().warn("The permission {} was not removed from the server since it was not found!", node);
+                }
+            }
+        }
+
         getFileManager().purge();
     }
 
