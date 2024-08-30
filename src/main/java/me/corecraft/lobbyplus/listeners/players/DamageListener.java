@@ -60,7 +60,7 @@ public class DamageListener implements Listener {
                 if (this.config.getProperty(ProtectionKeys.event_prevent_void_damage)) {
                     player.setFallDistance(0.0F);
 
-                    this.plugin.getScheduler().runDelayedTask(consumer -> player.teleport(player.getWorld().getSpawnLocation(), PlayerTeleportEvent.TeleportCause.PLUGIN), 3L);
+                    this.plugin.getScheduler().runDelayedTask(consumer -> player.teleport(player.getWorld().getSpawnLocation().toCenterLocation(), PlayerTeleportEvent.TeleportCause.PLUGIN), 3L);
 
                     event.setCancelled(true);
                 }
