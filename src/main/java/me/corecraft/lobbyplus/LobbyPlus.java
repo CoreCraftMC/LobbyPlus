@@ -46,6 +46,8 @@ public class LobbyPlus extends Vital {
 
     @Override
     public void onEnable() {
+        ConfigManager.load(getDataFolder());
+
         this.userManager = new UserManager(this);
 
         final org.bukkit.plugin.@NotNull PluginManager server = getServer().getPluginManager();
