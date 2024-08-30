@@ -76,7 +76,10 @@ public class LobbyPlus extends Vital {
         }
 
         List.of(
-                new CacheListener()
+                new CacheListener(),
+
+                new InteractionListener(),
+                new PlayerListener()
         ).forEach(listener -> getServer().getPluginManager().registerEvents(listener, this));
 
         CommandManager.load();
