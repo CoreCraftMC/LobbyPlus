@@ -1,7 +1,7 @@
 plugins {
     alias(libs.plugins.paperweight)
-    alias(libs.plugins.shadowJar)
     alias(libs.plugins.runPaper)
+    alias(libs.plugins.shadow)
 
     `paper-plugin`
 }
@@ -18,8 +18,6 @@ repositories {
 
 dependencies {
     paperweight.paperDevBundle(libs.versions.paper)
-
-    implementation(libs.triumph.cmds)
 
     implementation(libs.vital.paper)
 

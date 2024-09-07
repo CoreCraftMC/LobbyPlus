@@ -2,14 +2,20 @@ package me.corecraft.lobbyplus;
 
 import com.github.retrooper.packetevents.PacketEvents;
 import com.github.retrooper.packetevents.settings.PacketEventsSettings;
+import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.ryderbelserion.vital.common.api.interfaces.IPlugin;
 import com.ryderbelserion.vital.common.managers.PluginManager;
 import com.ryderbelserion.vital.paper.Vital;
 import io.github.retrooper.packetevents.factory.spigot.SpigotPacketEventsBuilder;
+import io.papermc.paper.command.brigadier.CommandSourceStack;
+import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents;
 import me.corecraft.lobbyplus.api.cache.UserManager;
 import me.corecraft.lobbyplus.api.cache.listeners.CacheListener;
 import me.corecraft.lobbyplus.api.enums.other.Permissions;
-import me.corecraft.lobbyplus.commands.CommandManager;
+import me.corecraft.lobbyplus.commands.BaseCommand;
+import me.corecraft.lobbyplus.commands.player.CommandHelp;
+import me.corecraft.lobbyplus.commands.staff.CommandBypass;
+import me.corecraft.lobbyplus.commands.staff.CommandReload;
 import me.corecraft.lobbyplus.configs.ConfigManager;
 import me.corecraft.lobbyplus.listeners.MiscListener;
 import me.corecraft.lobbyplus.listeners.MobListener;
@@ -88,7 +94,19 @@ public class LobbyPlus extends Vital {
                 new MobListener()
         ).forEach(listener -> getServer().getPluginManager().registerEvents(listener, this));
 
-        CommandManager.load();
+        // Register commands.
+        getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, event -> {
+            LiteralArgumentBuilder<CommandSourceStack> root = new BaseCommand().registerPermission().literal().createBuilder();
+
+            List.of(
+                    new CommandReload(),
+                    new CommandBypass(),
+
+                    new CommandHelp()
+            ).forEach(command -> root.then(command.registerPermission().literal()));
+
+            event.registrar().register(root.build(), "the base command for LobbyPlus");
+        });
 
         getComponentLogger().info("Done ({})!", String.format(Locale.ROOT, "%.3fs", (double) (System.nanoTime() - this.startTime) / 1.0E9D));
     }
@@ -125,10 +143,5 @@ public class LobbyPlus extends Vital {
 
     public final UserManager getUserManager() {
         return this.userManager;
-    }
-
-    @Override
-    public final boolean isLegacy() {
-        return false;
     }
 }
